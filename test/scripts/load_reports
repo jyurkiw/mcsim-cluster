@@ -1,0 +1,5 @@
+#!/bin/bash
+
+curl -H 'Content-Type: application/json' -d '{"spellName": "firebolt", "casterLevel": 3, "reportData": {"a": "b", "c": "d"}}' -X POST mcsim-cluster_api_1:5000/report
+curl -H 'Content-Type: application/json' -d '{"spellName": "frostbite", "casterLevel": 3, "reportData": {"a": "b", "c": "d"}}' -X POST mcsim-cluster_api_1:5000/report
+curl -H 'Content-Type: application/json' -d '{"spellName": "radiant flash", "casterLevel": 3, "reportData": {"a": "b", "c": "d"}}' -X POST mcsim-cluster_api_1:5000/report

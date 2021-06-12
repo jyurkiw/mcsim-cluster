@@ -1,0 +1,6 @@
+#!/bin/bash
+
+(
+    cd /app
+    bazel run //simrunner/app:sim_runner
+)

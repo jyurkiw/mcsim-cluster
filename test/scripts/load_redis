@@ -1,0 +1,5 @@
+#!/bin/bash
+
+curl -H 'Content-Type: application/json' -d '{"name": "firebolt"}' -X POST mcsim-cluster_api_1:5000/sim
+curl -H 'Content-Type: application/json' -d '{"name": "frostbite"}' -X POST mcsim-cluster_api_1:5000/sim
+curl -H 'Content-Type: application/json' -d '{"name": "radiant flash"}' -X POST mcsim-cluster_api_1:5000/sim
