@@ -59,7 +59,7 @@ services:
         tty: true
         stdin_open: true
         environment:
-            - API_URL=mcsim-cluster_api_1
+            - API_URL=http://mcsim-cluster_api_1:5000
             - API_TIMEOUT=3000
             - API_TIMEOUT_STEP=10
             - WORKSPACE_ROOT=/app
