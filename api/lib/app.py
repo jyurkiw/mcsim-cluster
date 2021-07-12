@@ -25,6 +25,7 @@ def get_redis():
 
 def init_db():
     # initialize the cluster connection
+    global cluster
     cluster = Cluster(json.loads(os.getenv('CASSANDRACLUSTERADDRESSES')))
 
     # begin our session
