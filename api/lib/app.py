@@ -24,8 +24,14 @@ def get_redis():
     return r
 
 def init_db():
-    # make sure we have a keyspace and connect to simulations
+    # initialize the cluster connection
+    cluster = Cluster(json.loads(os.getenv('CASSANDRACLUSTERADDRESSES')))
+
+    # begin our session
     global session
+    session = cluster.connect()
+
+    # make sure we have a keyspace and connect to simulations
     session.execute(CREATE_KEYSPACE)
     session = cluster.connect('simulations')
 
@@ -36,22 +42,9 @@ def init_db():
     global insertStmt
     insertStmt = session.prepare(INSERT_REPORT)
 
-def get_session():
-    global cluster
-    if cluster == None:
-        cluster = Cluster(json.loads(os.getenv('CASSANDRACLUSTERADDRESSES')))
-    
-    global session
-    if session == None:
-        session = cluster.connect()
-        init_db()
-    
-    return session
-
 @app.route('/sim', methods=['POST', 'GET'])
 def sim():
     if request.method == 'POST':
-        print(request.json)
         data = request.json
         get_redis().rpush('sims', data['name'])
         return data['name']
@@ -71,9 +64,10 @@ def report():
     
     # insert the report
     global insertStmt
-    get_session().execute(insertStmt, (uuid1(), spellName, casterLevel, reportData))
+    session.execute(insertStmt, (uuid1(), spellName, casterLevel, reportData))
 
     return 'received'
 
 if __name__ == '__main__':
+    init_db()
     app.run(host='0.0.0.0')
