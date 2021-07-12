@@ -75,6 +75,7 @@ services:
             - 5000:5000
         environment:
             - REDISADDRESS=mcsim-cluster_redis_1
+            - CASSANDRACLUSTERADDRESSES=["mcsim-cluster_db1_1", "mcsim-cluster_db2_1", "mcsim-cluster_db3_1"]
         tty: true
         stdin_open: true
         command: python /api/app.py
