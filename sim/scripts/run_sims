@@ -2,5 +2,6 @@
 
 (
     cd /app
-    bazel run //simrunner/app:sim_runner
+    pwd
+    #bazel run //simrunner/app:sim_runner
 )
